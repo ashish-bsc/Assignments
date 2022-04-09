@@ -1,7 +1,6 @@
 import requests as _requests
 import bs4 as _bs4
 import json as _json
-from typing import List
 
 def _generate_product_url(prod: str) -> str:
     url = f"https://www.bukalapak.com/products?from=omnisearch&from_keyword_history=false&search%5Bkeywords%5D={prod}&search_source=omnisearch_keyword&source=navbar"
@@ -12,7 +11,7 @@ def _get_page(url: str) -> _bs4.BeautifulSoup:
     soup = _bs4.BeautifulSoup(page.content, "html.parser")
     return soup
 
-def product_searched(prod: str) -> List[str]:
+def product_searched(prod: str) -> _json:
     url = _generate_product_url(prod)
     page = _get_page(url)
     raw_prod = page.find_all(class_="bl-text bl-text--body-14 bl-text--ellipsis__2")
